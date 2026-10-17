@@ -15,14 +15,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -44,7 +41,7 @@ import com.visualprogramming.week4.viewmodel.CarSaleViewModel
 import java.util.Locale
 
 @Composable
-fun view(viewModel: CarSaleViewModel = viewModel()){
+fun CarSaleAppView(viewModel: CarSaleViewModel = viewModel()){
     val carGallery by viewModel.carGalleryList.collectAsState()
 
     Column(Modifier.fillMaxSize().background(Color(0xfff6f4f0))) {
@@ -123,6 +120,6 @@ fun view(viewModel: CarSaleViewModel = viewModel()){
 
 @Composable
 @Preview(showSystemUi = true)
-fun preview(){
-    view()
+fun CarSaleAppPreview(){
+    CarSaleAppView()
 }
