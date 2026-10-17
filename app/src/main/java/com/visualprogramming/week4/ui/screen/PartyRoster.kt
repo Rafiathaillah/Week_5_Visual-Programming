@@ -50,7 +50,6 @@ import com.visualprogramming.week4.viewmodel.PartyRosterViewModel
 fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
     val heroGalleryItem by viewModel.heroList.collectAsState()
 
-    // State untuk menyimpan filter yang sedang diklik (Default: "All")
     var selectedFilter by remember { mutableStateOf("All") }
 
     Column(
@@ -59,7 +58,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
             .background(Color(0xFF0C0D14))
             .padding(start = 16.dp, end = 16.dp, top = 40.dp, bottom = 24.dp)
     ) {
-        // 1. Top Header
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -105,7 +103,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
             }
         }
 
-        // 2. Expedition Squad Container Card
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -120,7 +117,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
             Column(
                 modifier = Modifier.padding(14.dp)
             ) {
-                // Header Expedition Squad
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -151,18 +147,15 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                     )
                 }
 
-                // Slot Hero + Deploy Button (Diperbaiki agar tidak berdempetan)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Row untuk 3 slot hero + 1 slot plus (+)
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // 1. Tampilkan 3 hero pertama dari data list
                         heroGalleryItem.take(3).forEach { hero ->
                             Box(
                                 modifier = Modifier
@@ -181,14 +174,13 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                             }
                         }
 
-                        // 2. Slot ke-4: Box dengan Icon Plus (+)
                         Box(
                             modifier = Modifier
                                 .size(40.dp)
                                 .clip(RoundedCornerShape(8.dp))
                                 .background(Color(0xFF1B182B))
                                 .border(1.dp, Color(0xFF2E2942), RoundedCornerShape(8.dp))
-                                .clickable { /* Aksi tambah hero */ },
+                                .clickable { },
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
@@ -200,7 +192,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                         }
                     }
 
-                    // Deploy Button
                     Button(
                         onClick = { },
                         shape = RoundedCornerShape(10.dp),
@@ -220,7 +211,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
             }
         }
 
-        // 3. Search Bar Placeholder
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -240,7 +230,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
             }
         }
 
-        // 4. Filter Row dengan LazyRow (Diperbaiki agar warna dinamis saat diklik)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -252,7 +241,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                 modifier = Modifier.weight(1f),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Item "All"
                 item {
                     val isSelected = (selectedFilter == "All")
                     val bgColor = if (isSelected) Color(0xFF292011) else Color(0xFF161426)
@@ -278,7 +266,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                     }
                 }
 
-                // Item Filter Dinamis dari Data
                 items(heroGalleryItem) { item ->
                     val isSelected = (selectedFilter == item.heroType)
                     val bgColor = if (isSelected) Color(0xFF292011) else Color(0xFF161426)
@@ -307,7 +294,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            // Sort Button
             Card(
                 onClick = { },
                 shape = RoundedCornerShape(10.dp),
@@ -327,7 +313,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
             }
         }
 
-        // 5. Daftar Hero dengan LazyColumn (Tetap seperti kerangkamu)
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -344,7 +329,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                     Column(
                         modifier = Modifier.padding(14.dp)
                     ) {
-                        // Top Badges Row: Rarity, Class & CP
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -356,7 +340,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                // Rarity Badge Placeholder
                                 Box(
                                     modifier = Modifier
                                         .clip(RoundedCornerShape(6.dp))
@@ -371,7 +354,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                                     )
                                 }
 
-                                // Class Badge Placeholder
                                 Box(
                                     modifier = Modifier
                                         .clip(RoundedCornerShape(6.dp))
@@ -387,7 +369,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                                 }
                             }
 
-                            // CP Placeholder
                             Text(
                                 text = "⚔ ${item.cp} CP",
                                 color = Color(0xFFFFB300),
@@ -396,12 +377,10 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                             )
                         }
 
-                        // Main Hero Content: Image Placeholder + Details
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // Container Gambar Hero (Box Placeholder) + Badge Level
                             Box(
                                 modifier = Modifier
                                     .size(72.dp)
@@ -415,7 +394,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                                     contentDescription = null
                                 )
 
-                                // Level Badge Overlay
                                 Box(
                                     modifier = Modifier
                                         .padding(4.dp)
@@ -434,7 +412,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
 
                             Spacer(modifier = Modifier.width(12.dp))
 
-                            // Detail Hero: Nama, Arrow, HP Bar & MP Bar
                             Column(
                                 modifier = Modifier.weight(1f)
                             ) {
@@ -453,7 +430,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                                     )
                                 }
 
-                                // HP Bar Row
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -485,7 +461,6 @@ fun PartyRosterAppView(viewModel: PartyRosterViewModel = viewModel()) {
                                     )
                                 }
 
-                                // MP Bar Row
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically,
